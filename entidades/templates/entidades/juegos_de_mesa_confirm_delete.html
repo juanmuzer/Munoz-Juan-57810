@@ -1,0 +1,40 @@
+{% extends "entidades/index.html" %}
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Eliminar Juego de Mesa</h1>                                
+{% endblock titulo %}
+
+
+{% block contenido %}   
+<form action="" method="post" >
+    {% csrf_token %}   
+    <div class="text-center">     
+        <h2>
+            Esta seguro de eliminar el siguiente Juego?
+        </h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="card h-100">
+                <!-- Product image-->
+                <img class="card-img-top" style="width: 200px; height: 200px;" src="{% static 'assets/img/' %}{{object.codigo}}.jpg" alt="..." />
+                <!-- Product details-->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">{{ object.nombre }}</h5>
+                        <!-- Product details-->
+                        <p>Jugadores: {{ object.cant_jugadores }}</p>
+                        <p>Edad: {{ object.edad_recomendada }}</p>
+                        <!-- Precio del producto-->
+                        <p>${{ object.precio }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary btn-block" value="Confirmar">
+    </div>
+</form>
+
+{% endblock contenido %}

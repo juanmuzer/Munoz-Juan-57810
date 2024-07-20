@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mundo Geek Juegos</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <!-- Agregar para iconos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                <div class="navbar-nav">
+                    <h3>Mundo Geek Juegos</h3>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'acerca_de' %}">Acerca de</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tienda</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'juegos_de_mesa' %}">Juegos de Mesa</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'miniaturas' %}">Miniaturas</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'libros' %}">Libros</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'consolas' %}">Consolas</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-nav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ms-lg-4">
+                        {% if user.is_authenticated %}  
+                        <li class="nav-item">
+                            <img src="{{ request.session.imagenUsuario }}" height="45px" width="45px" alt="User Image">
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: blue; font-weight: bold;">{{ user.first_name }} {{ user.last_name }}</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'perfil' %}">Editar Usuario</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'password_change' %}">Cambiar Contraseña</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'agregar_imagenUsuario' %}">Cambiar Imagen</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>  
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Carrito
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header>
+                <div>
+                    <img style="width: 100vw; height: 300px;" src="{% static 'assets/img/index/pprincipal.jpg' %}" alt="..." />
+                </div>
+        </header>
+        {% block contenido %}
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for juego in juegos_random %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            {% if juego.imagen %}
+                            <img class="card-img-top" style="width: 200px; height: 200px;" src="{{ juego.imagen.url }}" alt="{{ juego.nombre }}">
+                            {% else %}
+                            <p>No image available</p>
+                            {% endif %}
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ juego.nombre }}</h5>
+                                    <!-- Product details-->
+                                    <p>Jugadores: {{ juego.cant_jugadores }}</p>
+                                    <p>Edad: {{ juego.edad_recomendada }}</p>
+                                    <!-- Precio del producto-->
+                                    <p>${{ juego.precio }}</p>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar a carrito</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for libro in libros_random %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            {% if libro.imagen %}
+                            <img class="card-img-top" style="width: 200px; height: 200px;" src="{{ libro.imagen.url }}" alt="{{ libro.nombre }}">
+                            {% else %}
+                            <p>No image available</p>
+                            {% endif %}
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ libro.nombre }}</h5>
+                                    <!-- Product details-->
+                                    <p>Autor: {{ libro.autor }}</p>
+                                    <p>Genero: {{ libro.genero }}</p>
+                                    <p>Cantidad de Paginas: {{ libro.cant_pag }}</p>
+                                    <!-- Precio del producto-->
+                                    <p>${{ libro.precio }}</p>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar a carrito</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for miniatura in miniaturas_random %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            {% if miniatura.imagen %}
+                            <img class="card-img-top" style="width: 200px; height: 200px;" src="{{ miniatura.imagen.url }}" alt="{{ miniatura.nombre }}">
+                            {% else %}
+                            <p>No image available</p>
+                            {% endif %}
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ miniatura.nombre }}</h5>
+                                    <!-- Product details-->
+                                    <p>Escala: {{ miniatura.escala }}</p>
+                                    <p>Material: {{ miniatura.material }}</p>
+                                    <!-- Precio del producto-->
+                                    <p>${{ miniatura.precio }}</p>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar a carrito</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for consola in consolas_random %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            {% if consola.imagen %}
+                            <img class="card-img-top" style="width: 200px; height: 200px;" src="{{ consola.imagen.url }}" alt="{{ consola.nombre }}">
+                            {% else %}
+                            <p>No image available</p>
+                            {% endif %}
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ consola.nombre }}</h5>
+                                    <!-- Product details-->
+                                    <p> Modelo: {{ consola.modelo }}</p>
+                                    <p>Estado: {{ consola.estado }}</p>
+                                    <!-- Precio del producto-->
+                                    <p>U$S{{ consola.precio }}</p>
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar a Carrito</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>     
+            </div>
+        </section>
+        {% endblock contenido %}
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

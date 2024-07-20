@@ -1,0 +1,44 @@
+{% extends "entidades/index.html" %}
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Eliminar Miniatura</h1>                                
+{% endblock titulo %}
+
+
+{% block contenido %}   
+<form action="" method="post">
+    {% csrf_token %}   
+    <div class="text-center">     
+        <h2>
+            Esta seguro de eliminar la siguiente Miniatura?
+        </h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="card h-100">
+                <!-- Product image-->
+                {% if object.imagen %}
+                <img class="card-img-top" src="{{ object.imagen.url }}" style="width: 200px; height: 200px;" alt="{{ object.nombre }}">
+                {% else %}
+                <p>No image available</p>
+                {% endif %}
+                <!-- Product details-->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <!-- Product name-->
+                        <h5 class="fw-bolder">{{ object.nombre }}</h5>
+                        <!-- Product details-->
+                        <p>Escala: {{ object.escala }}</p>
+                        <p>Material: {{ object.material }}</p>
+                        <!-- Precio del producto-->
+                        <p>${{ object.precio }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary btn-block" value="Confirmar">
+    </div>
+</form>
+
+{% endblock contenido %}
