@@ -1,7 +1,7 @@
 # Entrega Proyecto Final
-### Juan Muñoz
+### Juan Muñoz - Comisión: 57810
 
-## Nombre del proyecyo
+## Nombre de la Página
 ### Mundo Geek Juegos
 
 
@@ -9,42 +9,35 @@
 Es para una tienda de venta de juegos de mesa, miniaturas, libros y consolas
 (se puede adaptar a venta de cualquier producto)
 
-Al iniciar el proyecto en el Home tiene un menu el cual tenemos el Incio que te lleva al Home, luego tenemos acerca de que te da una explicacion de la empresa y luego tenemos un sub menu Tienda con 3 opciones:
-  - Juegos de Mesa
-  - Miniaturas
-  - Libros
 
-Caso de uso 1:  Buscar un Juego de Mesa
-- El usuario ingresa a la pagina de juegos de mesa
-- El usuario hace click en el boton Buscar Juego
-- El usuario ingresa el nombre del Juego o los caracteres a buscar
-- El sistema despliega la pagina con los resultados de la busqueda
+Al navegar en nuestra página sin logearnos nos permite:
+  - Acceder al home el cual nos muestra algunos productos de nuestra página.
+  - Acceder al Acerca de que es una breve descripcion de mi persona.
+  - Acceder al menu Tienda y sus 4 paginas:
+                                            - Juegos de mesa (con todos sus productos)
+                                            - Miniaturas (con todos sus productos)
+                                            - Libros (con todos sus productos)
+                                            - Consolas (con todos sus productos)
+  - Acceder a Registrarnos y crear un usuario
+  - Logearnos con nuestro usuario
 
-Caso de uso 2: Agregar un Juego de mesa
-- El usuario ingresa a la pagina de juegos de mesa
-- El usuario hace click en boton agregar juego
-- El usuario ingresa todos los datos del juego
-- El sistema despliega la pagina principal de juegos de mesa y apareceran todos los juegos incluido el agregado recien
-  sin la imagen,  ya que la imagen hay que cargarla manualmente dentro de la carpeta asset/img/"de nombre el codigo del        producto".jpg
+Al navegar en nuestra página si nos logeamos con nuestro usuario nos permite:
+  - Acceder a todo lo anteriormente marcado sin usuario (excepto Registrarnos y Logearnos)
+  - Cambiar informacion del usuario
+  - Cambiar contraseña del usuario
+  - Cambiar Imagen del usuario
+  - Deslogearse
 
-Caso de uso 3: Agregar una Miniatura
-- El usuario ingresa a la pagina de Miniaturas
-- El usuario hace click en boton Agregar miniatura
-- El usuario ingresa todos los datos de la miniatura
-- El sistema despliega la pagina principal de Miniaturas y apareceran todas las miniaturas incluida la agregada recien
-  sin la imagen,  ya que la imagen hay que cargarla manualmente dentro de la carpeta asset/img/"de nombre el codigo del        producto".jpg
-
-Caso de uso 4: Agregar un Libro
-- El usuario ingresa a la pagina de Libros
-- El usuario hace click en boton Agregar libro
-- El usuario ingresa todos los datos del libro
-- El sistema despliega la pagina principal de Libros y apareceran todos los libros incluida el agregado recien
-  sin la imagen,  ya que la imagen hay que cargarla manualmente dentro de la carpeta asset/img/"de nombre el codigo del        producto".jpg
-
-(En este caso al no tener inicio de sesion aun estan siempre visibles)
-
+Al navegar en nuestra página si nos logeamos conmo admin nos permite:
+  -Acceder a todo lo anteriormente marcado con nuestro usuario
+  - Crear cualquier producto (Juego de mesa, Miniatura, Libro y Consolas)
+  - Editar cualquier producto (Juego de mesa, Miniatura, Libro y Consolas)
+  - Eliminar cualquier producto (Juego de mesa, Miniatura, Libro y Consolas)
 
 Para iniciar el proyecto en un terminal, nos ubicamos en la carpeta donde se encuentre el manage.py y corremos el comando "python manage.py runserver"
+El usuario admin de nuestra consola es:
+  Usuario: admin
+  Contraseña: Coder12345.
 
 El proyecto se realizo con:
   - Python
@@ -53,3 +46,7 @@ El proyecto se realizo con:
   - HTML5
   - CSS
   - Javascript
+
+Pruebas realizadas se encuentran en nuestro repositorio con el nombre "Casos de prueba.xlsx"
+
+Video demostracion se encuentra en nuestro repositorio con el nombre "Video Explicativo.mp4"
