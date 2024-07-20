@@ -49,4 +49,4 @@ El proyecto se realizo con:
 
 Pruebas realizadas se encuentran en nuestro repositorio con el nombre "Casos de prueba.xlsx"
 
-Video demostracion se encuentra en nuestro repositorio con el nombre "Video Explicativo.mp4"
+Video demostracion se encuentra en el siguiente link: https://drive.google.com/file/d/10I1_fZeMnJLgXQ9INX-Yxymo9SEB3uzU/view?usp=drive_link
