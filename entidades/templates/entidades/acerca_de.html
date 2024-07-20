@@ -1,0 +1,23 @@
+{% extends 'entidades/index.html' %}
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Acerca de Mi</h1>
+{% endblock titulo %}
+
+
+{% block contenido %}
+    <h1 class="titulo-especial">Acerca de Mi</h1>
+    
+    <div class="text-center">
+        <img src="{% static 'assets/img/yo.jpg' %}" height="250px" width="200px" alt="">
+    </div>
+    <div>
+        <p> Mi nombre es Juan Muñoz, vivo en Montevideo, Uruguay. <br>
+            Trabajo hace 11 años en el area de IT principalmente en el aria de Auxiliar informatico.<br>
+            De chico me interese en las computadoras por los videojuegos y empece a estudiar cosas relacionadas a la informatica.<br>
+            Actualmente me encuentro trabajando en un Colegio de Auxiliar informatico y estudiando Programacion el idioma Python porque me interesa la programacion y me gustaria
+            poder dedicarme de lleno en un futuro no muy lejano.<br>
+            Gracias por visitar mi página</p>
+     </div>
+{% endblock contenido %}

@@ -1,0 +1,20 @@
+{% extends 'entidades/index.html' %}
+
+{% block titulo %}
+<h1 class="mb-5">Login</h1>
+{% endblock titulo %}
+
+{% block contenido %}
+<h1 class="titulo-especial">Login</h1>
+<div class="form-container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <input type="submit" value="Login">
+    </form>
+</div>
+{% endblock contenido %}
+
+    

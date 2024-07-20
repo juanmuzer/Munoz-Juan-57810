@@ -1,0 +1,71 @@
+{% extends 'entidades/index.html' %}
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Libros</h1>
+{% endblock titulo %}
+
+
+{% block contenido %}
+    <h1 class="titulo-especial">LIBROS</h1>
+    <form method="GET" action="{% url 'encontrarLibro' %}" class="search-form">
+        <input type="text" name="buscar" placeholder="Buscar libros" class="search-input">
+        <button type="submit" class="search-button">Buscar</button>
+    </form>
+    {% if user.is_authenticated and user.is_superuser %}
+    <div class="contenedor-botones-agregar">
+        <a href="{% url 'librosCreate' %}" class="boton-agregar derecha">+ Agregar Libro</a>
+    </div>
+    {% endif %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% for libro in libros_list %}
+                <div class="col mb-5">
+                    {% if user.is_authenticated and user.is_superuser %}
+                    <div>
+                        <a 
+                        href="{% url 'librosUpdate' libro.id %}"
+                        class="btn btn-primary"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                        ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                        </a>
+                        <a
+                        href="{% url 'librosDelete' libro.id %}"
+                        class="btn btn-danger"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                        ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                        </a> 
+                    </div>
+                    {% endif %}
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        {% if libro.imagen %}
+                        <img class="card-img-top" src="{{ libro.imagen.url }}" style="width: 200px; height: 200px;" alt="{{ libro.nombre }}">
+                        {% else %}
+                        <p>No image available</p>
+                        {% endif %}
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{ libro.nombre }}</h5>
+                                <!-- Product details-->
+                                <p>Autor: {{ libro.autor }}</p>
+                                <p>Genero: {{ libro.genero }}</p>
+                                <p>Cantidad de Paginas: {{ libro.cant_pag }}</p>
+                                <!-- Precio del producto-->
+                                <p>${{ libro.precio }}</p>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Agregar a Carrito</a></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock contenido %}
